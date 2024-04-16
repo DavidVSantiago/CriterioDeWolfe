@@ -1,0 +1,2 @@
+# CriterioDeWolfe
+Projeto IC - UESB
