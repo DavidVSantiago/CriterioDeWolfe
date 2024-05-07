@@ -1,10 +1,12 @@
 import java.util.Random;
+import java.util.Scanner;
 
 import data_structures.*;
 
 class Principal{
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Random random = new Random();
+        //Random random = new Random();
         OtimzarFuncaoAlgo(new Vec2(0.0, 0.0));
         
         // wolfeAlgo(new Vec2(0.0, 0.0));
