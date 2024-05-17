@@ -1,6 +1,6 @@
 import data_structures.Vec2;
 
-public class Wolf {
+public class Armijo2 {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.01; // lambda
     public static final double n2 = 0.1; // beta
@@ -24,23 +24,17 @@ public class Wolf {
             if(testeArmijo(X2)){ // satizfaz armijo
                 System.out.println("Satizfaz Amijo com alpha = "+alpha);
                 alphaPiso = alpha; // sobe o piso
+                alphaTeto = alpha; // desce o teto
             }else{ // não satizfaz armijo
                 //System.out.println("Não satizfaz Amijo - desce o teto");
                 alphaTeto = alpha; // desce o teto
+                
+                double a = (1-r)*alphaPiso +     r*alphaTeto;
+                double b =     r*alphaPiso + (1-r)*alphaTeto;
+                alpha = Math.max(a,Math.min(alpha,b)); // busca do novo alpha padrão
+                
             }
 
-            if(testeWolf(X2)){ // satizfaz WOLF (as duas)
-                System.out.println("Satizfaz WOLF com alpha ="+alpha);
-                alphaTeto = alpha; // desce o teto
-            }else{ // não satizfaz WOLF (as duas)
-                if(alphaTeto==infinito){ // se nunca houve descida do teto (teto intocado, nunca houve uma falha de armijo)
-                    alpha = Math.max(alpha,R*alphaPiso); // busca do novo alpha especial
-                }else{ // quando cai o teto
-                    double a = (1-r)*alphaPiso +     r*alphaTeto;
-                    double b =     r*alphaPiso + (1-r)*alphaTeto;
-                    alpha = Math.max(a,Math.min(alpha,b)); // busca do novo alpha padrão
-                }
-            }
         }
         System.out.println("Alpha escolhido="+alpha);
         return X2;
@@ -65,7 +59,7 @@ public class Wolf {
         System.out.println("alphaPiso: "+alphaPiso);
     }
     public static void resetAlphas(){
-        alpha = 0.005;
+        alpha = 0.09;
         alphaPiso = 0.0;
         alphaTeto = infinito; // começa com infinito 
     }

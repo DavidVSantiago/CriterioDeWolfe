@@ -36,7 +36,7 @@ class Principal{
                 return X;
             }
             System.out.println("Não funcionou. Tentando novamente encontrar um alpha \n");
-            X = Wolf.proxIter(X);
+            X = Armijo2.proxIter(X);
             count++;
         }
     }
