@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 import data_structures.*;
@@ -9,18 +8,6 @@ class Principal{
         //Random random = new Random();
         OtimzarFuncaoAlgo(new Vec2(0.0, 0.0));
         
-        // wolfeAlgo(new Vec2(0.0, 0.0));
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
-        // wolfeAlgo(new Vec2(0.0, 0.0));
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
-        // wolfeAlgo(new Vec2(0.0, 0.0));
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
-        // System.out.println("****************************************");
 
     }
     /** ALGORITMO WOLFE */
@@ -36,7 +23,7 @@ class Principal{
                 return X;
             }
             System.out.println("Não funcionou. Tentando novamente encontrar um alpha \n");
-            X = Armijo2.proxIter(X);
+            X = Armijo.proxIter(X);
             count++;
         }
     }

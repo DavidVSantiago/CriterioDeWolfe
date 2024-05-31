@@ -1,15 +1,14 @@
 import data_structures.Vec2;
 
-public class Wolf {
+public class WolfTest {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.01; // lambda
-    public static final double n2 = 0.7; // beta
+    public static final double n2 = 0.1; // beta
     public static double alpha;
     public static double alphaPiso;
     public static double alphaTeto;
     public static Vec2 DK;
     public static Vec2 X;
-    public static Vec2 X2;
     public static double R = 10;
     public static double r = 0.1;
     
@@ -19,9 +18,8 @@ public class Wolf {
         DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
 
         while (alphaPiso!=alphaTeto) { // busca de um alpha valido
-            X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
             System.out.println("Testando com alpha="+alpha);
-            if(testeArmijo(X2)){ // satizfaz armijo
+            if(testeArmijo(X)){ // satizfaz armijo
                 System.out.println("Satizfaz Amijo com alpha = "+alpha);
                 alphaPiso = alpha; // sobe o piso
             }else{ // não satizfaz armijo
@@ -29,7 +27,7 @@ public class Wolf {
                 alphaTeto = alpha; // desce o teto
             }
 
-            if(testeWolf(X2)){ // satizfaz WOLF (as duas)
+            if(testeWolf(X)){ // satizfaz WOLF (as duas)
                 System.out.println("Satizfaz WOLF com alpha ="+alpha);
                 alphaTeto = alpha; // desce o teto
             }else{ // não satizfaz WOLF (as duas)
@@ -43,19 +41,19 @@ public class Wolf {
             }
         }
         System.out.println("Alpha escolhido="+alpha);
-        return X2;
+        return X;
     }
 
-    public static boolean testeArmijo(Vec2 X2){
-        double compareEsq = Utils.objetivo(X2);
+    public static boolean testeArmijo(Vec2 X){
+        double compareEsq = Utils.objetivo(X);
         double compareDir = (Utils.objetivo(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient(X),DK)));
         //System.out.println(compareEsq+"<="+compareDir);
         if(compareEsq <= compareDir) return true;
         return false;
     }
-    public static boolean testeWolf(Vec2 X2){
-        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient(X2), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient(X), DK));
-        if(testeArmijo(X2)==true && segundaCond==true) return true;
+    public static boolean testeWolf(Vec2 X){
+        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient(X), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient(X), DK));
+        if(testeArmijo(X)==true && segundaCond==true) return true;
         return false;
     }
 
@@ -65,7 +63,7 @@ public class Wolf {
         System.out.println("alphaPiso: "+alphaPiso);
     }
     public static void resetAlphas(){
-        alpha = 1;//0.005;
+        alpha = 0.15;//0.005;
         alphaPiso = 0.0;
         alphaTeto = infinito; // começa com infinito 
     }
