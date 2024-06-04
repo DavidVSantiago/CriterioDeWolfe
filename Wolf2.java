@@ -1,8 +1,8 @@
 import data_structures.Vec2;
 
-public class Wolf {
+public class Wolf2 {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
-    public static final double n1 = 0.01; // lambda
+    public static final double n1 = 0.001; // lambda
     public static final double n2 = 0.1; // beta
     public static double alpha;
     public static double alphaPiso;
@@ -16,7 +16,7 @@ public class Wolf {
     public static Vec2 proxIter(Vec2 Xpar) {
         resetAlphas();
         X = Xpar;
-        DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
+        DK = Utils.multEscalarVec2(-1, Utils.gradient2(X));
 
         while (alphaPiso!=alphaTeto) { // busca de um alpha valido
             X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
@@ -47,14 +47,14 @@ public class Wolf {
     }
 
     public static boolean testeArmijo(Vec2 X2){
-        double compareEsq = Utils.objetivo(X2);
-        double compareDir = (Utils.objetivo(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient(X),DK)));
+        double compareEsq = Utils.objetivo2(X2);
+        double compareDir = (Utils.objetivo2(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient2(X),DK)));
         //System.out.println(compareEsq+"<="+compareDir);
         if(compareEsq <= compareDir) return true;
         return false;
     }
     public static boolean testeWolf(Vec2 X2){
-        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient(X2), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient(X), DK));
+        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient2(X2), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient2(X), DK));
         if(testeArmijo(X2)==true && segundaCond==true) return true;
         return false;
     }

@@ -1,66 +1,48 @@
 import data_structures.Vec2;
 
 public class Armijo2 {
-    public static final double infinito = 0.7976931348623157E308; // constante infinita
-    public static final double n1 = 0.01; // lambda
-    public static final double n2 = 0.1; // beta
-    public static double alpha;
-    public static double alphaPiso;
-    public static double alphaTeto;
     public static Vec2 DK;
-    public static Vec2 X;
-    public static Vec2 X2;
-    public static double R = 2.0;
-    public static double r = 0.5;
+    public static double alpha;
+    public static double n1;
+    public static double fator;
     
-    public static Vec2 proxIter(Vec2 Xpar) {
-        resetAlphas();
-        X = Xpar;
-        DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
+    public static void initConstants(Vec2 X){
+        DK = Utils.multEscalarVec2(-1, Utils.gradient2(X));
+        alpha = 1;
+        n1 = 0.001;
+        fator = 0.5;
+    }
 
-        while (alphaPiso!=alphaTeto) { // busca de um alpha valido
-            X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
+    public static Vec2 proxIter(Vec2 X){
+        initConstants(X);
+
+        while (true) { // busca de um alpha valido
             System.out.println("Testando com alpha="+alpha);
-            if(testeArmijo(X2)){ // satizfaz armijo
-                System.out.println("Satizfaz Amijo com alpha = "+alpha);
-                alphaPiso = alpha; // sobe o piso
-                alphaTeto = alpha; // desce o teto
-            }else{ // não satizfaz armijo
-                //System.out.println("Não satizfaz Amijo - desce o teto");
-                alphaTeto = alpha; // desce o teto
-                
-                double a = (1-r)*alphaPiso +     r*alphaTeto;
-                double b =     r*alphaPiso + (1-r)*alphaTeto;
-                alpha = Math.max(a,Math.min(alpha,b)); // busca do novo alpha padrão
-                
+            Vec2 X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
+            double compareEsq = Utils.objetivo2(X2);
+            double compareDir = (Utils.objetivo2(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient2(X),DK)));
+            //System.out.println(compareEsq+"<="+compareDir);
+            if(compareEsq <= compareDir){ // comapração de Armijo
+                System.out.println("Alpha escolhido="+alpha);
+                System.out.println("Função objetivo no ponto Xk = "+Utils.objetivo2(X));
+                return X2;
             }
-
+            //System.out.println("Alpha = "+alpha+" não serve!");  
+            alpha=alpha*(1-fator);
         }
-        System.out.println("Alpha escolhido="+alpha);
-        return X2;
     }
 
-    public static boolean testeArmijo(Vec2 X2){
-        double compareEsq = Utils.objetivo(X2);
-        double compareDir = (Utils.objetivo(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient(X),DK)));
-        //System.out.println(compareEsq+"<="+compareDir);
-        if(compareEsq <= compareDir) return true;
-        return false;
+    public static void testAlphaInterval(Vec2 X){
+        initConstants(X);
+        while (alpha>0) {
+            Vec2 X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
+            double compareEsq = Utils.objetivo2(X2);
+            double compareDir = (Utils.objetivo2(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient2(X),DK)));
+            //System.out.println(compareEsq+"<="+compareDir);
+            if(compareEsq <= compareDir)
+            System.out.println("Satisfaz armijo com alpha ="+alpha);
+            else System.out.println("Não atisfaz armijo com alpha ="+alpha);
+            alpha-=0.01;
+        }
     }
-    public static boolean testeWolf(Vec2 X2){
-        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient(X2), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient(X), DK));
-        if(testeArmijo(X2)==true && segundaCond==true) return true;
-        return false;
-    }
-
-    public static void printAlphas(){
-        System.out.println("alphaTeto: "+alphaTeto);
-        System.out.println("alpha: "+alpha);
-        System.out.println("alphaPiso: "+alphaPiso);
-    }
-    public static void resetAlphas(){
-        alpha = 0.09;
-        alphaPiso = 0.0;
-        alphaTeto = infinito; // começa com infinito 
-    }
-}   
+}

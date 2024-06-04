@@ -3,9 +3,9 @@ import data_structures.Vec2;
 public class Armijo {
     public static Vec2 proxIter(Vec2 X){
         Vec2 DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
-        double alpha = 1;   
+        double alpha = 1;
         double n1 = 0.01;
-        double fator = 0.9; //90%
+        double fator = 0.5; //50%
         while (true) { // busca de um alpha valido
             System.out.println("Testando com alpha="+alpha);
             Vec2 X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
