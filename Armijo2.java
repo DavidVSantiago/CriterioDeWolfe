@@ -17,14 +17,15 @@ public class Armijo2 {
         initConstants(X);
 
         while (true) { // busca de um alpha valido
-            System.out.println("Testando com alpha="+alpha);
+            //System.out.println("Testando com alpha="+alpha);
             Vec2 X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
             double compareEsq = Utils.objetivo2(X2);
             double compareDir = (Utils.objetivo2(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient2(X),DK)));
             //System.out.println(compareEsq+"<="+compareDir);
             if(compareEsq <= compareDir){ // comapração de Armijo
-                System.out.println("Alpha escolhido="+alpha);
-                System.out.println("Função objetivo no ponto Xk = "+Utils.objetivo2(X));
+                //System.out.println("Alpha escolhido="+alpha);
+                Utils.countLocalSteps+=alpha;
+                //System.out.println("Função objetivo no ponto Xk = "+Utils.objetivo2(X));
                 return X2;
             }
             //System.out.println("Alpha = "+alpha+" não serve!");  

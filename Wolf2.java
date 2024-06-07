@@ -3,7 +3,7 @@ import data_structures.Vec2;
 public class Wolf2 {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.001; // lambda
-    public static final double n2 = 0.1; // beta
+    public static final double n2 = 0.003; // beta
     public static double alpha;
     public static double alphaPiso;
     public static double alphaTeto;
@@ -20,9 +20,9 @@ public class Wolf2 {
 
         while (alphaPiso!=alphaTeto) { // busca de um alpha valido
             X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
-            System.out.println("Testando com alpha="+alpha);
+            //System.out.println("Testando com alpha="+alpha);
             if(testeArmijo(X2)){ // satizfaz armijo
-                System.out.println("Satizfaz Amijo com alpha = "+alpha);
+                //System.out.println("Satizfaz Amijo com alpha = "+alpha);
                 alphaPiso = alpha; // sobe o piso
             }else{ // não satizfaz armijo
                 //System.out.println("Não satizfaz Amijo - desce o teto");
@@ -30,7 +30,7 @@ public class Wolf2 {
             }
 
             if(testeWolf(X2)){ // satizfaz WOLF (as duas)
-                System.out.println("Satizfaz WOLF com alpha ="+alpha);
+                //System.out.println("Satizfaz WOLF com alpha ="+alpha);
                 alphaTeto = alpha; // desce o teto
             }else{ // não satizfaz WOLF (as duas)
                 if(alphaTeto==infinito){ // se nunca houve descida do teto (teto intocado, nunca houve uma falha de armijo)
@@ -42,7 +42,8 @@ public class Wolf2 {
                 }
             }
         }
-        System.out.println("Alpha escolhido="+alpha);
+        //System.out.println("Alpha escolhido="+alpha);
+        Utils.countLocalSteps+=alpha;
         return X2;
     }
 

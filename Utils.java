@@ -3,6 +3,10 @@
 import data_structures.Vec2;
 
 public class Utils {
+    /** ATRIBUTOS GLOBAIS */
+    public static double countGlobalSteps=0.0, countLocalSteps=0.0;
+    public static int countLocalIterations=0,countGlobalIterations= 0;
+    public static long totalTimeNano=0;
 
     /** FUNÇÕES BÁSICAS */
     public static double norma(Vec2 vec2){
