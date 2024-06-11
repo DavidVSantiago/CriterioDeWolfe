@@ -1,4 +1,7 @@
+package algoritmos;
+
 import data_structures.Vec2;
+import utils.Utils;
 
 public class Armijo {
     public static Vec2 proxIter(Vec2 X){

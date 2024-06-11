@@ -1,4 +1,7 @@
+package utils;
 /* Esta classe possuias funções auxiliares aos algoritmos */
+
+import java.util.Random;
 
 import data_structures.Vec2;
 
@@ -50,9 +53,37 @@ public class Utils {
         Vec2 result = new Vec2(v1.x+v2.x, v1.y+v2.y); 
         return result;
     }
+    public static boolean compareVec2Vec2(Vec2 v1, Vec2 v2){
+        if(v1.x==v2.x && v1.y==v2.y) return true;
+        return false;
+    }
 
     public static double produtoInternoVec2(Vec2 v1, Vec2 v2){
         double result = (v1.x*v2.x) + (v1.y*v2.y);
         return result;
     }
+
+    public static double generateRandom(double min, double max){
+        Random random = new Random();
+        double frac = random.nextDouble();
+        double value = ((max-min)*frac)-Math.abs(min);
+        return value;
+    }
+
+    public static Vec2[] generatePoints(int n){
+        int min = -100;
+        int max = 100;
+       
+        Vec2[] pointList = new Vec2[n];
+        for(int i=0;i<n;i++){ // gera os n Vec2
+            double x = generateRandom(min, max);
+            double y = generateRandom(min, max);
+            Vec2 X = new Vec2(y,x);
+            pointList[i] = X;  
+        } 
+        return pointList;
+    }
+
+    
+    
 }
