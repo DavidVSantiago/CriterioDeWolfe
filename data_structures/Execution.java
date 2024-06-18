@@ -30,11 +30,14 @@ public class Execution {
     }
 
     // métodos
-    public void start(){
+    /** Executa o algoritmo limitando a quantidade de iteradas*/
+    public void start(long maxIterates){
         clock.setStartTime(); // marca o fim do tempo
-        for(int i=0;i<pointList.length;i++){ // percorre os n pontos a serem executados
+        int i;
+        for(i=0;i<pointList.length;i++){ // percorre os n pontos a serem executados
             // executa o método gradiente para cada um dos n pontos
-            Vec2 criticalPoint = MetodoGradiente.start(this,pointList[i]);
+            Vec2 criticalPoint = MetodoGradiente.start(this,pointList[i],maxIterates);
+            if(criticalPoint==null) break;
             setCriticalPoint(criticalPoint, i);
         }
         clock.setEndTime(); // marca o fim do tempo
@@ -59,6 +62,9 @@ public class Execution {
     }
     public Vec2 getCritPoint(int index){
         return this.criticPointList[index];
+    }
+    public long getTotalIterates(){
+        return this.totalIterates;
     }
 
     // setters
