@@ -22,11 +22,6 @@ class Principal{
         execArmijo.start(-1); // sem limitação de iteradas 
         execWolf.start(-1); // sem limitação de iteradas
 
-        // impressão dos relatórios
-        // System.out.println("Primeira execução com "+pointList.length+" pontos");
-        // execArmijo.printRel();
-        // execWolf.printRel();
-
         /** Um lista com filtragem dos pontos de "pointList", cujos respectivos pontos críticos são iguais para ambos os algoritmos*/
         List<Vec2> subPointList = new ArrayList<Vec2>();
         // filtrar os dados dos pontos críticos
@@ -52,6 +47,11 @@ class Principal{
         System.out.println("Nova execução com "+subPointList.size()+" pontos (os filtrados)");
         execWolf.printRel();
         execArmijo.printRel();
+
+        // System.out.println("SUBLISTA DE PONTOS");
+        // for (int i=0;i<subPointList.size();i++) {
+        //     System.out.println("ponto "+i+":("+subPointList.get(i).x+","+subPointList.get(i).y+")");
+        // }
    
     }
 }

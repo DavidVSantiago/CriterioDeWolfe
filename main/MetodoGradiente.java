@@ -14,7 +14,7 @@ public class MetodoGradiente {
         while(true){
             execution.addIterate(); // registra mais 1 iterada na execução
             double v = Utils.norma(Utils.gradient(X));
-            if(v < 0.000001){ // contra o ponto crítico
+            if(v < 0.000001){ // encontra o ponto crítico
                 return X;
             }
             //System.out.println("Não funcionou. Tentando novamente encontrar um alpha \n");

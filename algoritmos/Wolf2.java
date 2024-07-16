@@ -14,7 +14,7 @@ public class Wolf2 {
     public static Vec2 DK;
     public static Vec2 X;
     public static Vec2 X2;
-    public static double R = 10;
+    public static double R = 2;//10;
     public static double r = 0.5;
     
     public static Vec2 proxIter(Execution execution, Vec2 Xpar) {
