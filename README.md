@@ -1,2 +1,10 @@
 # CriterioDeWolfe
 Projeto IC - UESB
+
+
+
+//TODO 4 gráficos
+1º - GRÁFICO (ITERADASxTAMANHO DE PASSO) - Usar um ponto inicial definido 
+2º - IDEM
+3º - GRÁFICO (EXECUÇÃO COMPLETA x MÉDIA DE PASSO DE CADA EXECUÇÃO COMPLETA)
+4º - GRÁFICO (EXECUÇÃO COMPLETA x TOTAL DE ITERADAS GLOBAL)

@@ -41,7 +41,7 @@ class Principal{
 
         // executar os algoritmos novamente.
         execWolf.start(-1); // sem limitação de iteradas
-        execArmijo.start(execWolf.getTotalIterates()); // com limitação de iteradas   
+        execArmijo.start(-1); // com limitação de iteradas   
         
         // impressão dos relatórios
         System.out.println("Nova execução com "+subPointList.size()+" pontos (os filtrados)");
