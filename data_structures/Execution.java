@@ -19,20 +19,21 @@ public class Execution {
     Clock clock;
 
     // construtor
-    public Execution(Algorithm algorithm,Vec2[] pointList){
+    
+    // métodos
+    private void init(Algorithm algorithm,Vec2[] pointList){
         this.algorithm=algorithm;
         this.pointList = pointList;
         criticPointList = new Vec2[pointList.length];
         totalIterates = 0;
         totalStepsSize = 0.0;
-        totalTime = 0.0;
+        totalTime = 0.0;this.algorithm=algorithm;
         clock = new Clock();
     }
-
-    // métodos
     /** Executa o algoritmo limitando a quantidade de iteradas*/
-    public void start(long maxIterates){
-        clock.setStartTime(); // marca o fim do tempo
+    public void start(long maxIterates,Algorithm algorithm,Vec2[] pointList){
+        init(algorithm, pointList);
+        clock.setStartTime(); // marca o inicio do tempo
         int i;
         for(i=0;i<pointList.length;i++){ // percorre os n pontos a serem executados
             // executa o método gradiente para cada um dos n pontos
@@ -43,8 +44,14 @@ public class Execution {
         clock.setEndTime(); // marca o fim do tempo
         totalTime = clock.getDeltaTimeInSeconds();
         clock.reset();
-
     }
+
+    /** Executa o algoritmo para a geração do gráfico tipo 1
+     * @return - array com a série de dados para o gráfico */
+    public Double[] startType01(Algorithm algorithm,Vec2 point){
+        return MetodoGradiente.startType01(algorithm,point);
+    }
+    
 
     public void printRel(){
         String algorithmName = (algorithm==Algorithm.ARMIJO)?"ARMIJO":"WOLF";
@@ -54,6 +61,12 @@ public class Execution {
         System.out.println("Média do tamanho de passo por iterada = "+totalStepsSize/totalIterates);
         System.out.println("Tempo de execução = "+totalTime);
         System.out.println("*************************************************\n");
+    }
+
+    public void printGraph01(){
+        String algorithmName = (algorithm==Algorithm.ARMIJO)?"ARMIJO":"WOLF";
+        System.out.println("*************************************************");
+
     }
 
     // getters

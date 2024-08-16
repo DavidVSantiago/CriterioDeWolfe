@@ -1,7 +1,7 @@
 package main;
 import java.util.Scanner;
 
-import algoritmos.WolfTest;
+import algoritmos._old.WolfTest;
 import data_structures.*;
 
 class Teste{
