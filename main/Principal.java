@@ -65,7 +65,7 @@ class Principal{
         // }
         System.out.println("\nWOLF");
         serieDados = execWolf.startType01(Execution.Algorithm.WOLF, ponto);
-        // System.out.println("\nWOLF");
+        Utils.serieDadosParaArquivo("grafico-01.txt", serieDados);
         // for (int i=0; i<serieDados.length;i++) {
         //     System.out.println("posX "+(i+1)+": "+serieDados[i]);
         // }

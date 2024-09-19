@@ -35,7 +35,7 @@ public class MetodoGradiente {
                 X = retorno.X;
                 stepSize = retorno.stepSize;
             }
-            System.out.println(""+(iterate+1)+"X=("+X.x+","+X.y+") | stepSize="+stepSize);
+            //System.out.println(""+(iterate+1)+"X=("+X.x+","+X.y+") | stepSize="+stepSize);
             graphData.add(stepSize); // adiciona o o tamanho de passo na série de dados
             iterate++;
         }

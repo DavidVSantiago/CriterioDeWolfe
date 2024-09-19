@@ -1,18 +1,18 @@
 package utils;
 /* Esta classe possuias funções auxiliares aos algoritmos */
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Random;
 
 import data_structures.Vec2;
 
 public class Utils {
-    /** ATRIBUTOS GLOBAIS */
-    public static double countGlobalSteps=0.0, countLocalSteps=0.0;
-    public static int countLocalIterations=0,countGlobalIterations= 0;
-    public static long totalTimeNano=0;
 
+    /* ******************************************************************************************** */
     /** FUNÇÕES BÁSICAS */
+    /* ******************************************************************************************** */
     public static double norma(Vec2 vec2){
         double result = Math.sqrt( Math.pow(vec2.x, 2) +  Math.pow(vec2.y, 2));
         return result;
@@ -50,7 +50,9 @@ public class Utils {
     }
 
 
+    /* ******************************************************************************************** */
     /** FUNÇÕES AUXILIARES */
+    /* ******************************************************************************************** */
     
     public static Vec2 multEscalarVec2(double escalar, Vec2 vec2){
         Vec2 result = new Vec2(escalar*vec2.x, escalar*vec2.y);
@@ -100,5 +102,20 @@ public class Utils {
         return array;
     }
     
-    
+    /* ******************************************************************************************** */
+    /** FUNÇÕES DE ARQUIVOS */
+    /* ******************************************************************************************** */
+    public static void serieDadosParaArquivo(String nomeArquivo, Double[] serieDados) {
+        try {
+            FileWriter fw = new FileWriter(nomeArquivo); // Cria um objeto FileWriter para escrever no arquivo
+            PrintWriter pw = new PrintWriter(fw); // Cria um objeto PrintWriter para facilitar a escrita
+            // percorre cada um dos dados na série
+            for(int i=0;i<serieDados.length;i++){
+                pw.println(serieDados[i]); // Escreve o texto no arquivo
+            }
+            pw.close();// Fecha o PrintWriter para liberar os recursos
+        } catch (Exception e) {
+           System.out.println("Erro da gravação dos dados em arquivo!");
+        }
+    }
 }
