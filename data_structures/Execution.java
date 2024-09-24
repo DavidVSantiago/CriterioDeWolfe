@@ -49,7 +49,14 @@ public class Execution {
     /** Executa o algoritmo para a geração do gráfico tipo 1
      * @return - array com a série de dados para o gráfico */
     public Double[] startType01(Algorithm algorithm,Vec2 point){
-        return MetodoGradiente.startType01(algorithm,point);
+        ArrayList<Double[]> execList = new ArrayList<Double[]>();
+        for(int i=2;i<=29;i++){
+            double n2 = i*0.01;
+            Double[] exec = MetodoGradiente.startType01(algorithm,point,n2);
+            execList.add(exec);
+        }
+        return null;
+        
     }
     
 

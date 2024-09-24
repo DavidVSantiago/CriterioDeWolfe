@@ -7,7 +7,7 @@ import utils.Utils;
 public class Wolf {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.01; // lambda
-    public static final double n2 = 0.02; // beta
+    public static double n2 = 0.02; // beta
     public static double alpha;
     public static double alphaPiso;
     public static double alphaTeto;
@@ -44,8 +44,11 @@ public class Wolf {
         execution.addStepsSize(alpha);
         return X2;
     }
-    public static DadosRetorno proxIterType01(Vec2 Xpar){
+
+    /** Execução para a geração do 1º gráfico (variando o n2) */
+    public static DadosRetorno proxIterType01(Vec2 Xpar, double _n2){
         resetAlphas();
+        n2=_n2;
         X = Xpar;
         DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
 

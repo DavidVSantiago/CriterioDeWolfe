@@ -10,8 +10,8 @@ class Principal{
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         // // gera a lista de n pontos aleatórios
-        // int n = 10;
-        // Vec2[] pointList = Utils.generatePoints(n);
+        int n = 10;
+        //Vec2[] pointList = Utils.generatePoints(n);
         // // array para marcar as coindicências de pontos críticos das execução
         // boolean[] criticalMatch = new boolean[pointList.length];
 
@@ -53,19 +53,19 @@ class Principal{
         // //     System.out.println("ponto "+i+":("+subPointList.get(i).x+","+subPointList.get(i).y+")");
         // // }
 
-        Vec2 ponto = new Vec2(5, 5);
-        Execution execArmijo = new Execution();
+        Vec2[] pointList = Utils.generatePoints(1);
         Execution execWolf = new Execution();
+        execWolf.startType01(Execution.Algorithm.WOLF, pointList[0]); // sem limitação de iteradas
 
-        System.out.println("\nARMIJO");
-        Double[] serieDados = execArmijo.startType01(Execution.Algorithm.ARMIJO, ponto);
+        // System.out.println("\nARMIJO");
+        //Double[] serieDados = execArmijo.startType01(Execution.Algorithm.ARMIJO, ponto);
         // System.out.println("ARMIJO");
         // for (int i=0; i<serieDados.length;i++) {
         //     System.out.println("posX "+(i+1)+": "+serieDados[i]);
         // }
-        System.out.println("\nWOLF");
-        serieDados = execWolf.startType01(Execution.Algorithm.WOLF, ponto);
-        Utils.serieDadosParaArquivo("grafico-01.txt", serieDados);
+        // System.out.println("\nWOLF");
+        //Double[] serieDados = execWolf.startType01(Execution.Algorithm.WOLF, ponto);
+        //Utils.serieDadosParaArquivo("grafico-01.txt", serieDados);
         // for (int i=0; i<serieDados.length;i++) {
         //     System.out.println("posX "+(i+1)+": "+serieDados[i]);
         // }
