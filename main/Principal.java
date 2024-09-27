@@ -1,7 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import data_structures.*;
 import utils.Utils;
@@ -54,6 +52,7 @@ class Principal{
         // // }
 
         Vec2[] pointList = Utils.generatePoints(1);
+        //pointList[0] = new Vec2(0, 0);
         Execution execWolf = new Execution();
         execWolf.startType01(Execution.Algorithm.WOLF, pointList[0]); // sem limitação de iteradas
 

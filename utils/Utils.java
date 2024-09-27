@@ -81,8 +81,8 @@ public class Utils {
     }
 
     public static Vec2[] generatePoints(int n){
-        int min = 0;
-        int max = 10;
+        int min = -100;
+        int max = 100;
        
         Vec2[] pointList = new Vec2[n];
         for(int i=0;i<n;i++){ // gera os n Vec2

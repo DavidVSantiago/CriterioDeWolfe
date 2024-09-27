@@ -50,11 +50,13 @@ public class Execution {
      * @return - array com a série de dados para o gráfico */
     public Double[] startType01(Algorithm algorithm,Vec2 point){
         ArrayList<Double[]> execList = new ArrayList<Double[]>();
-        for(int i=2;i<=29;i++){
+        for(int i=2;i<=99;i++){ // de 2 a 29
             double n2 = i*0.01;
             Double[] exec = MetodoGradiente.startType01(algorithm,point,n2);
             execList.add(exec);
+
         }
+
         return null;
         
     }
