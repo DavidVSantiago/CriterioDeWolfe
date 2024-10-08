@@ -1,4 +1,5 @@
-package data_structures;
+package utils;
+
 public class Vec2 {
     // atributos
     public double x,y;

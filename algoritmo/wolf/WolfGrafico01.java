@@ -1,39 +1,36 @@
-package algoritmos._old;
+package wolf;
 
-import data_structures.Vec2;
-import utils.Utils;
+import utils.*;
 
-public class Wolf {
+public class WolfGrafico01 {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.01; // lambda
-    public static final double n2 = 0.1; // beta
+    public static final double n2 = 0.02; // beta
     public static double alpha;
     public static double alphaPiso;
     public static double alphaTeto;
     public static Vec2 DK;
     public static Vec2 X;
     public static Vec2 X2;
-    public static double R = 10;
+    public static double R = 2;//10;
     public static double r = 0.5;
     
-    public static Vec2 proxIter(Vec2 Xpar) {
-        resetAlphas();
-        X = Xpar;
-        DK = Utils.multEscalarVec2(-1, Utils.gradient(X));
+    public static DadosRetorno proxIter(Vec2 Xpar){
+        alpha = 1;//0.005;
+        alphaPiso = 0.0;
+        alphaTeto = infinito; // começa com infinito 
+
+        X=Xpar;
+        DK = MathFunctions.multEscalarVec2(-1, MathFunctions.gradient(X));
 
         while (alphaPiso!=alphaTeto) { // busca de um alpha valido
-            X2 = Utils.somaVec2Vec2(X,Utils.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
-            System.out.println("Testando com alpha="+alpha);
+            X2 = MathFunctions.sumVec2Vec2(X,MathFunctions.multEscalarVec2(alpha, DK)); // cria a próxima geração do X
             if(testeArmijo(X2)){ // satizfaz armijo
-                System.out.println("Satizfaz Amijo com alpha = "+alpha);
                 alphaPiso = alpha; // sobe o piso
             }else{ // não satizfaz armijo
-                //System.out.println("Não satizfaz Amijo - desce o teto");
                 alphaTeto = alpha; // desce o teto
             }
-
             if(testeWolf(X2)){ // satizfaz WOLF (as duas)
-                System.out.println("Satizfaz WOLF com alpha ="+alpha);
                 alphaTeto = alpha; // desce o teto
             }else{ // não satizfaz WOLF (as duas)
                 if(alphaTeto==infinito){ // se nunca houve descida do teto (teto intocado, nunca houve uma falha de armijo)
@@ -45,31 +42,30 @@ public class Wolf {
                 }
             }
         }
-        System.out.println("Alpha escolhido="+alpha);
-        return X2;
+        return new DadosRetorno(X2,alpha);
     }
 
+    // DUVIDA: a comparação de X2 e X. Cada novo X2 gerado é comparado com o X inicial?
     public static boolean testeArmijo(Vec2 X2){
-        double compareEsq = Utils.objetivo(X2);
-        double compareDir = (Utils.objetivo(X) + (alpha*n1*Utils.produtoInternoVec2(Utils.gradient(X),DK)));
+        double compareEsq = MathFunctions.objetivo(X2);
+        double compareDir = (MathFunctions.objetivo(X) + (alpha*n1*MathFunctions.innerProductVec2(MathFunctions.gradient(X),DK)));
         //System.out.println(compareEsq+"<="+compareDir);
         if(compareEsq <= compareDir) return true;
         return false;
     }
     public static boolean testeWolf(Vec2 X2){
-        boolean segundaCond = Utils.produtoInternoVec2(Utils.gradient(X2), DK) >= (n2 * Utils.produtoInternoVec2(Utils.gradient(X), DK));
+        boolean segundaCond = MathFunctions.innerProductVec2(MathFunctions.gradient(X2), DK) >= (n2 * MathFunctions.innerProductVec2(MathFunctions.gradient(X), DK));
         if(testeArmijo(X2)==true && segundaCond==true) return true;
         return false;
     }
 
-    public static void printAlphas(){
-        System.out.println("alphaTeto: "+alphaTeto);
-        System.out.println("alpha: "+alpha);
-        System.out.println("alphaPiso: "+alphaPiso);
-    }
-    public static void resetAlphas(){
-        alpha = 1;//0.005;
-        alphaPiso = 0.0;
-        alphaTeto = infinito; // começa com infinito 
+   /** Classe interna para representar os dados de retorno da execução do algoritmo */ 
+ public static class DadosRetorno{
+        public Vec2 X;
+        public double stepSize;
+        public DadosRetorno(Vec2 X, double stepSize){
+            this.X=X;
+            this.stepSize=stepSize;
+        }
     }
 }   
