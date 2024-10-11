@@ -5,7 +5,7 @@ import utils.*;
 public class WolfGrafico01 {
     public static final double infinito = 0.7976931348623157E308; // constante infinita
     public static final double n1 = 0.01; // lambda
-    public static final double n2 = 0.02; // beta
+    public static double n2;
     public static double alpha;
     public static double alphaPiso;
     public static double alphaTeto;
@@ -15,7 +15,8 @@ public class WolfGrafico01 {
     public static double R = 2;//10;
     public static double r = 0.5;
     
-    public static DadosRetorno proxIter(Vec2 Xpar){
+    public static DadosRetorno proxIter(Vec2 Xpar,double neta){
+        n2 = neta;
         alpha = 1;//0.005;
         alphaPiso = 0.0;
         alphaTeto = infinito; // começa com infinito 

@@ -17,6 +17,12 @@ public class Utils {
         return value;
     }
 
+    public static Vec2 generatePoint(double min, double max){
+        double x = generateRandom(min, max);
+        double y = generateRandom(min, max);
+        return new Vec2(x,y);
+    }
+
     /** Definition */
     public static Vec2[] generatePoints(int n){
         int min = -10;
@@ -26,7 +32,7 @@ public class Utils {
         for(int i=0;i<n;i++){ // gera os n Vec2
             double x = generateRandom(min, max);
             double y = generateRandom(min, max);
-            Vec2 X = new Vec2(y,x);
+            Vec2 X = new Vec2(x,y);
             pointList[i] = X;  
         } 
         return pointList;

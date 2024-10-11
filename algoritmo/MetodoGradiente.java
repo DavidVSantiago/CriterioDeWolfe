@@ -11,7 +11,7 @@ public class MetodoGradiente {
     /** Função de execução do algoritmo para a geração do Gráfico 01
      * @return Retorna uma lista com os dados para gráfico
     */
-    public static Double[] start_grafico01(Vec2 startPoint){
+    public static Double[] start_grafico01(Vec2 startPoint, double neta){
         
         ArrayList<Double> graphData = new ArrayList<Double>(); // estrutura que conterá a série de dados do gráfico 01
         Vec2 X = startPoint;
@@ -22,7 +22,7 @@ public class MetodoGradiente {
             if(v < 0.000001){ // condição de parada das iteradas
                 break; // termina as iteradas, abandonando a estrutura de repetição
             }
-            DadosRetorno retorno = WolfGrafico01.proxIter(X); // executa wolf e obtém os dados de execução do algoritmo
+            DadosRetorno retorno = WolfGrafico01.proxIter(X, neta); // executa wolf e obtém os dados de execução do algoritmo
             X = retorno.X; // captura o valor de X
             stepSize = retorno.stepSize; // captura o tamanho de passo da iteração
     
