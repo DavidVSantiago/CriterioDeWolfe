@@ -4,6 +4,6 @@ Projeto IC - UESB
 
 
 //3 gráficos (2 tipos de execução que o algoritmo faz)
-1º - GRÁFICO (ITERADASxTAMANHO DE PASSO) - Usar um ponto inicial definido 
-2º - GRÁFICO (EXECUÇÃO COMPLETA x MÉDIA DE PASSO DE CADA EXECUÇÃO COMPLETA)
-3º - GRÁFICO (EXECUÇÃO COMPLETA x TOTAL DE ITERADAS GLOBAL)
+1º - Gráfico -> execução dos netas X iterada
+2º - Gráfico -> média das N conjuntos de execução dos netas X iterada
+3º - Gráfico -> execução dos netas X media de tamanho de passo
