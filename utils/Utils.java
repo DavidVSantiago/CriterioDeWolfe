@@ -2,6 +2,7 @@ package utils;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -60,6 +61,24 @@ public class Utils {
             // percorre cada um dos dados na série
             for(int i=0;i<serieDados.length;i++){
                 pw.println(serieDados[i]); // Escreve o texto no arquivo
+            }
+            pw.close();// Fecha o PrintWriter para liberar os recursos
+        } catch (Exception e) {
+           System.out.println("Erro da gravação dos dados em arquivo!");
+        }
+    }
+    public static void serieDadosDoubleParaArquivo(String nomeArquivo, double[] serieDados) {
+        try {
+            FileWriter fw = new FileWriter(nomeArquivo); // Cria um objeto FileWriter para escrever no arquivo
+            PrintWriter pw = new PrintWriter(fw); // Cria um objeto PrintWriter para facilitar a escrita
+            
+            // Formatador de números com separador decimal ","
+            DecimalFormat df = new DecimalFormat("#,###.00000000"); // Ajuste o padrão conforme necessário
+
+            // percorre cada um dos dados na série
+            for(int i=0;i<serieDados.length;i++){
+                String numeroFormatado = df.format(serieDados[i]);
+                pw.println(numeroFormatado); // Escreve o texto no arquivo
             }
             pw.close();// Fecha o PrintWriter para liberar os recursos
         } catch (Exception e) {
