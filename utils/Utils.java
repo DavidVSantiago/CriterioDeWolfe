@@ -6,10 +6,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
-/* Esta classe possuias funções auxiliares aos algoritmos */
+/* Esta classe define as funções auxiliares aos algoritmos */
 public class Utils {
  
-    /** Definition */
     public static double generateRandom(double min, double max){
         Random random = new Random();
         double frac = random.nextDouble();
@@ -24,18 +23,16 @@ public class Utils {
     }
 
     /** Definition */
-    public static Vec2[] generatePoints(int n){
-        int min = -10;
-        int max = 10;
-       
-        Vec2[] pointList = new Vec2[n];
-        for(int i=0;i<n;i++){ // gera os n Vec2
-            double x = generateRandom(min, max);
-            double y = generateRandom(min, max);
-            Vec2 X = new Vec2(x,y);
-            pointList[i] = X;  
-        } 
-        return pointList;
+    public static Vec2[] generatePoints(int qtd){
+        Random random = new Random(); // objeto gerador de numeros aleatórios
+        Vec2[ ] pontos = new Vec2[qtd]; // array de pontos
+        for(int i=0;i<qtd;i++){ // preenche o array com cada um dos 100 pontos
+            // gera os valores x e y aleatórios entre -100 e 100 que irão compor o ponto X0
+            double x = ((100-(-100))*random.nextDouble())-Math.abs(-100);
+            double y = ((100-(-100))*random.nextDouble())-Math.abs(-100);
+            pontos[i] = new Vec2(x,y); // adiciona no array um novo ponto inicial X0.
+        }
+        return pontos;
     }
 
     /** Definition */
