@@ -1,4 +1,4 @@
-# CriterioDeWolfe
+# Criterio de Wolfe
 Projeto IC - UESB
 
 
